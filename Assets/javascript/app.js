@@ -1,4 +1,4 @@
-var topic = ["British Shorthair", "Siamese", "Bengal", "Russian Blue", "Scottish Fold", "Maine Coon"];
+var topic = ["British Shorthair Cat", "Siamese Cat", "Bengal Cat", "Russian Blue Cat", "Scottish Fold Cat", "Maine Coon Cat"];
 var apiKey = "km5YcBR9PTSmFAVwqgDUQrSJgGHmP2Gu";
 var searchTerm; 
 
@@ -17,8 +17,12 @@ function getGIFS() {
     }).then(function(response) {
         console.log(response);
         //add the images to the gifHolder div and att their attributes
+        $(".dynamicImg").remove();
         for (var i = 0; i < response.data.length; i++) {
-            $("#gifHolder").append("<img src='" + response.data[i].images.fixed_height_still.url + "' data-still='" + response.data[i].images.fixed_height_still.url + "' data-animate='" + response.data[i].images.fixed_height.url + "'>");
+            var newDiv = $("<div class='dynamicImg' id='pic" + i + "'>");
+            $("#gifHolder").append(newDiv);
+            $("#pic" + i).append("<p>Rating: " + response.data[i].rating + "</p>");
+            $("#pic" + i).append("<img src='" + response.data[i].images.fixed_height_still.url + "' data-still='" + response.data[i].images.fixed_height_still.url + "' data-animate='" + response.data[i].images.fixed_height.url + "'>");
 
         }
     });
@@ -38,7 +42,7 @@ $(document).on("click", "#submitBtn", function() {
     }    
 });
 
-//search button clicked
+//when a topic is clicked
 $(document).on("click", ".search", function() {
     searchTerm = $(this).text();
     getGIFS();
