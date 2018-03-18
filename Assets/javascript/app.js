@@ -10,7 +10,7 @@ function generateBtns() {
 
 //call the giphy api
 function getGIFS() {
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + searchTerm + "&limit=10&api_key=" + apiKey
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchTerm + "&limit=10&api_key=" + apiKey
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -23,7 +23,6 @@ function getGIFS() {
             $("#gifHolder").append(newDiv);
             $("#pic" + i).append("<p>Rating: " + response.data[i].rating + "</p>");
             $("#pic" + i).append("<img src='" + response.data[i].images.fixed_height_still.url + "' data-still='" + response.data[i].images.fixed_height_still.url + "' data-animate='" + response.data[i].images.fixed_height.url + "'>");
-
         }
     });
 }    
